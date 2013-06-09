@@ -1,0 +1,432 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+progamada.com -- emu8086 assembler version: 4.02  
+ 
+[ 05/06/2013  --  04:05:27 p.m. ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       org 100h
+[   2]    0100:                                       begin:
+[   3]    0100: B8 00 06                              MOV AX,0600H
+[   4]    0103: B7 0F                                 MOV BH,0FH
+[   5]    0105: B9 00 00                              MOV CX,0000H
+[   6]    0108: BA 4F 18                              MOV DX,184FH
+[   7]    010B: CD 10                                 INT 10H
+[   8]    010D: B4 02                                 MOV AH,02H
+[   9]    010F: B7 00                                 MOV BH,00
+[  10]    0111: B6 00                                 MOV DH,00
+[  11]    0113: B2 00                                 MOV DL,00
+[  12]    0115: CD 10                                 INT 10H
+[  13]    0117: B8 00 00                              mov ax,0
+[  14]    011A: BB 00 00                              mov bx,0
+[  15]    011D: B9 00 00                              mov cx,0
+[  16]    0120: BA 00 00                              mov dx,0
+[  17]    0123: C7 06 B9 04 00 00                     mov n1,0
+[  18]    0129: C7 06 BD 04 00 00                     mov n2,0
+[  19]    012F: C6 06 C1 04 00                        mov num1[0],0
+[  20]    0134: C6 06 C2 04 00                        mov num1[1],0
+[  21]    0139: C6 06 C3 04 00                        mov num1[2],0
+[  22]    013E: C6 06 C4 04 00                        mov num1[3],0
+[  23]    0143: C6 06 C6 04 00                        mov num2[0],0
+[  24]    0148: C6 06 C7 04 00                        mov num2[1],0
+[  25]    014D: C6 06 C8 04 00                        mov num2[2],0
+[  26]    0152: C6 06 C9 04 00                        mov num2[3],0
+[  27]        :                                       ;set all string value to zero
+[  28]    0157: C6 06 CB 04 00                        mov string[0],0
+[  29]    015C: C6 06 CC 04 00                        mov string[1],0
+[  30]    0161: C6 06 CD 04 00                        mov string[2],0
+[  31]    0166: C6 06 CE 04 00                        mov string[3],0
+[  32]    016B: C6 06 CF 04 00                        mov string[4],0
+[  33]    0170: C6 06 D0 04 00                        mov string[5],0
+[  34]    0175: C6 06 D1 04 00                        mov string[6],0
+[  35]    017A: C6 06 D2 04 00                        mov string[7],0
+[  36]        :                                       ;set message to request the first number
+[  37]    017F: BA D4 04                              MOV DX,offset m0
+[  38]    0182: B4 09                                 MOV AH,9
+[  39]    0184: CD 21                                 INT 21H
+[  40]    0186: C6 06 B7 04 04                        mov index,4
+[  41]        :                                       ;get the first number between 0 and 9999
+[  42]    018B:                                       first:
+[  43]    018B: 8B 0E B7 04                           mov cx,index
+[  44]    018F: B5 00                                 mov ch,0
+[  45]    0191: B4 01                                 Mov AH,1
+[  46]    0193: CD 21                                 int 21h
+[  47]    0195: 3C 1B                                 cmp al,27
+[  48]    0197: 75 03 E9 01 03                        je endl
+[  49]    019C: 3C 0D                                 cmp al,13
+[  50]    019E: 75 03 E9 97 00                        je cont
+[  51]    01A3: 3C 30                                 cmp al,48
+[  52]    01A5: 72 2B                                 jb del1
+[  53]    01A7: 3C 39                                 cmp al,57
+[  54]    01A9: 7F 27                                 jg del1
+[  55]    01AB: 2C 30                                 sub al,30h
+[  56]    01AD: B4 00                                 mov ah,0
+[  57]    01AF: 8A 26 C2 04                           mov ah,num1[1]
+[  58]    01B3: 88 26 C1 04                           mov num1[0],ah
+[  59]    01B7: 8A 26 C3 04                           mov ah,num1[2]
+[  60]    01BB: 88 26 C2 04                           mov num1[1],ah
+[  61]    01BF: 8A 26 C4 04                           mov ah,num1[3]
+[  62]    01C3: 88 26 C3 04                           mov num1[2],ah
+[  63]    01C7: A2 C4 04                              mov num1[3],al
+[  64]    01CA: FE 0E B7 04                           dec index
+[  65]    01CE: E2 BB                                 loop first
+[  66]    01D0: EB 68                                 jmp cont
+[  67]    01D2:                                       del1:
+[  68]    01D2: B8 00 06                              MOV AX,0600H
+[  69]    01D5: B7 0F                                 MOV BH,0fH
+[  70]    01D7: B9 16 00                              MOV CX,0016H
+[  71]    01DA: 80 C1 04                              add cl,4
+[  72]    01DD: 2A 0E B7 04                           sub cl,index
+[  73]    01E1: BA 4F 18                              MOV DX,184FH
+[  74]    01E4: CD 10                                 INT 10H
+[  75]    01E6: B4 02                                 MOV AH,02H
+[  76]    01E8: B7 00                                 MOV BH,00
+[  77]    01EA: B6 00                                 MOV DH,00
+[  78]    01EC: B2 16                                 MOV DL,22
+[  79]    01EE: 80 C2 04                              add dl,4
+[  80]    01F1: 2A 16 B7 04                           sub dl,index
+[  81]    01F5: CD 10                                 INT 10H
+[  82]    01F7: EB 92                                 jmp first
+[  83]        :                                       
+[  84]    01F9:                                       del2:
+[  85]    01F9: B8 00 06                              MOV AX,0600H
+[  86]    01FC: B7 0F                                 MOV BH,0fH
+[  87]    01FE: B9 18 01                              MOV CX,0118H
+[  88]    0201: 80 C1 04                              add cl,4
+[  89]    0204: 2A 0E B7 04                           sub cl,index
+[  90]    0208: BA 4F 18                              MOV DX,184FH
+[  91]    020B: CD 10                                 INT 10H
+[  92]    020D: B4 02                                 MOV AH,02H
+[  93]    020F: B7 00                                 MOV BH,00
+[  94]    0211: B6 01                                 MOV DH,01
+[  95]    0213: B2 18                                 MOV DL,24
+[  96]    0215: 80 C2 04                              add dl,4
+[  97]    0218: 2A 16 B7 04                           sub dl,index
+[  98]    021C: CD 10                                 INT 10H
+[  99]    021E: EB 2D                                 jmp second
+[ 100]        :                                       
+[ 101]    0220:                                       del3:
+[ 102]    0220: B8 00 06                              MOV AX,0600H
+[ 103]    0223: B7 0F                                 MOV BH,0fH
+[ 104]    0225: B9 36 02                              MOV CX,0236H
+[ 105]    0228: BA 4F 18                              MOV DX,184FH
+[ 106]    022B: CD 10                                 INT 10H
+[ 107]    022D: B4 02                                 MOV AH,02H
+[ 108]    022F: B7 00                                 MOV BH,00
+[ 109]    0231: B6 02                                 MOV DH,02
+[ 110]    0233: B2 36                                 MOV DL,54
+[ 111]    0235: CD 10                                 INT 10H
+[ 112]    0237: E9 9E 00                              jmp sign
+[ 113]        :                                       
+[ 114]        :                                       
+[ 115]    023A:                                       cont:
+[ 116]    023A: BA AE 05                              MOV DX,offset jump_line
+[ 117]    023D: B4 09                                 MOV AH,9
+[ 118]    023F: CD 21                                 INT 21H
+[ 119]        :                                       ;set message to request the second number
+[ 120]    0241: BA EC 04                              MOV DX,offset m1
+[ 121]    0244: B4 09                                 MOV AH,9
+[ 122]    0246: CD 21                                 INT 21H
+[ 123]    0248: C6 06 B7 04 04                        mov index,4
+[ 124]        :                                       ;get the second number between 0 and 9999
+[ 125]        :                                       
+[ 126]    024D:                                       second:
+[ 127]    024D: 8B 0E B7 04                           mov cx,index
+[ 128]    0251: B5 00                                 mov ch,0
+[ 129]    0253: B4 01                                 Mov AH,1
+[ 130]    0255: CD 21                                 int 21h
+[ 131]    0257: 3C 1B                                 cmp al,27
+[ 132]    0259: 75 03 E9 3F 02                        je endl
+[ 133]    025E: 3C 0D                                 cmp al,13
+[ 134]    0260: 74 2D                                 je cont2
+[ 135]    0262: 3C 30                                 cmp al,48
+[ 136]    0264: 72 93                                 jb del2
+[ 137]    0266: 3C 39                                 cmp al,57
+[ 138]    0268: 7F 8F                                 jg del2
+[ 139]    026A: 2C 30                                 sub al,30h
+[ 140]    026C: B4 00                                 mov ah,0
+[ 141]    026E: 8A 26 C7 04                           mov ah,num2[1]
+[ 142]    0272: 88 26 C6 04                           mov num2[0],ah
+[ 143]    0276: 8A 26 C8 04                           mov ah,num2[2]
+[ 144]    027A: 88 26 C7 04                           mov num2[1],ah
+[ 145]    027E: 8A 26 C9 04                           mov ah,num2[3]
+[ 146]    0282: 88 26 C8 04                           mov num2[2],ah
+[ 147]    0286: A2 C9 04                              mov num2[3],al
+[ 148]    0289: FE 0E B7 04                           dec index
+[ 149]    028D: E2 BE                                 loop second
+[ 150]    028F:                                       cont2:
+[ 151]    028F: BA AE 05                              MOV DX,offset jump_line
+[ 152]    0292: B4 09                                 MOV AH,9
+[ 153]    0294: CD 21                                 INT 21H
+[ 154]        :                                       ;set message to request the operating
+[ 155]    0296: BA 04 05                              MOV DX,offset m2
+[ 156]    0299: B4 09                                 MOV AH,9
+[ 157]    029B: CD 21                                 INT 21H
+[ 158]        :                                       ;get the operating
+[ 159]        :                                       
+[ 160]    029D: B3 0A                                 mov bl,10
+[ 161]    029F: B9 04 00                              mov cx,4
+[ 162]    02A2: BE 00 00                              mov si,0
+[ 163]    02A5:                                       while:
+[ 164]    02A5: A1 B9 04                              mov ax,n1
+[ 165]    02A8: F7 E3                                 mul bx
+[ 166]    02AA: A3 B9 04                              mov n1,ax
+[ 167]    02AD: B8 00 00                              mov ax,0
+[ 168]    02B0: 8B 84 C1 04                           mov ax,num1[si]
+[ 169]    02B4: B4 00                                 mov ah,0
+[ 170]    02B6: 01 06 B9 04                           add n1,ax
+[ 171]    02BA: A1 B9 04                              mov ax,n1
+[ 172]        :                                       
+[ 173]    02BD: A1 BD 04                              mov ax,n2
+[ 174]    02C0: F7 E3                                 mul bx
+[ 175]    02C2: A3 BD 04                              mov n2,ax
+[ 176]    02C5: B8 00 00                              mov ax,0
+[ 177]    02C8: 8B 84 C6 04                           mov ax,num2[si]
+[ 178]    02CC: B4 00                                 mov ah,0
+[ 179]    02CE: 01 06 BD 04                           add n2,ax
+[ 180]    02D2: A1 BD 04                              mov ax,n2
+[ 181]        :                                       
+[ 182]    02D5: 46                                    inc si
+[ 183]    02D6: E2 CD                                 loop while
+[ 184]    02D8:                                       sign:
+[ 185]    02D8: B9 04 00                              mov cx,4
+[ 186]    02DB: BE 03 00                              mov si,3
+[ 187]    02DE: BF 07 00                              mov di,7
+[ 188]    02E1: B4 01                                 Mov AH,1
+[ 189]    02E3: CD 21                                 int 21h
+[ 190]    02E5: 3C 1B                                 cmp al,27
+[ 191]    02E7: 75 03 E9 B1 01                        je endl
+[ 192]    02EC: 3C 2B                                 cmp al,'+'
+[ 193]    02EE: 74 16                                 je add_
+[ 194]    02F0: 3C 2D                                 cmp al,'-'
+[ 195]    02F2: 74 30                                 je subtract
+[ 196]    02F4: 3C 26                                 cmp al,'&'
+[ 197]    02F6: 74 56                                 je divid
+[ 198]    02F8: 3C 2E                                 cmp al,'.'
+[ 199]    02FA: 75 03 E9 BD 00                        je multiply
+[ 200]    02FF: 3C 2B                                 cmp al,'+'
+[ 201]    0301: 74 03 E9 1A FF                        jne del3
+[ 202]        :                                       ;add funtion
+[ 203]    0306:                                       add_:
+[ 204]    0306: B8 00 00                              mov ax,0
+[ 205]    0309: 8A 84 C1 04                           mov al,num1[si]
+[ 206]    030D: 02 84 C6 04                           add al,num2[si]
+[ 207]    0311: B3 0A                                 mov bl,10
+[ 208]    0313: F6 F3                                 div bl
+[ 209]    0315: 00 A5 CB 04                           add string[di],ah
+[ 210]    0319: 00 85 CA 04                           add string[di-1],al
+[ 211]    031D: 4E                                    dec si
+[ 212]    031E: 4F                                    dec di
+[ 213]    031F: E2 E5                                 loop add_
+[ 214]    0321: E9 56 01                              jmp answer
+[ 215]        :                                       ;subtract funtion
+[ 216]    0324:                                       subtract:
+[ 217]    0324: A1 BD 04                              mov ax,n2
+[ 218]    0327: 39 06 B9 04                           cmp n1,ax
+[ 219]    032B: 73 03 E9 2A 01                        jb negative
+[ 220]    0330: B8 00 00                              mov ax,0
+[ 221]    0333: 8A 84 C1 04                           mov al,num1[si]
+[ 222]    0337: 2A 84 C6 04                           sub al,num2[si]
+[ 223]    033B: B3 0A                                 mov bl,10
+[ 224]    033D: F6 F3                                 div bl
+[ 225]    033F: 00 A5 CB 04                           add string[di],ah
+[ 226]    0343: 00 85 CA 04                           add string[di-1],al
+[ 227]    0347: 4E                                    dec si
+[ 228]    0348: 4F                                    dec di
+[ 229]    0349: E2 D9                                 loop subtract
+[ 230]    034B: E9 2C 01                              jmp answer
+[ 231]        :                                       ;divid funtion
+[ 232]    034E:                                       divid:
+[ 233]    034E: BA 00 00                              mov dx,0
+[ 234]    0351: A1 B9 04                              mov ax,n1
+[ 235]    0354: 3B 06 BD 04                           cmp ax,n2
+[ 236]    0358: 73 03 E9 0D 01                        jb less
+[ 237]    035D: 83 3E BD 04 00                        cmp n2,0
+[ 238]    0362: 75 03 E9 EA 00                        je div_by_zero
+[ 239]    0367: B3 0A                                 mov bl,10
+[ 240]    0369: BE 08 00                              mov si,8
+[ 241]    036C: 8B 0E BD 04                           mov cx,n2
+[ 242]    0370: A1 BD 04                              mov ax,n2
+[ 243]    0373: C6 06 B7 04 00                        mov index,0
+[ 244]    0378:                                       a:
+[ 245]    0378: A3 BD 04                              mov n2,ax
+[ 246]    037B: A1 BD 04                              mov ax,n2
+[ 247]    037E: F7 E3                                 mul bx
+[ 248]    0380: 4E                                    dec si
+[ 249]    0381: 39 06 B9 04                           cmp n1,ax
+[ 250]    0385: 7F F1                                 jg a
+[ 251]    0387:                                       b:
+[ 252]    0387: A1 B9 04                              mov ax,n1
+[ 253]    038A: 2B 06 BD 04                           sub ax,n2
+[ 254]    038E: FE 06 B7 04                           inc index
+[ 255]    0392: 3B 06 BD 04                           cmp ax,n2
+[ 256]    0396: A3 B9 04                              mov n1,ax
+[ 257]    0399: 7F EC                                 jg b
+[ 258]    039B: A1 B7 04                              mov ax,index
+[ 259]    039E: 88 84 CB 04                           mov string[si],al
+[ 260]    03A2: A1 B9 04                              mov ax,n1
+[ 261]    03A5: 3B 06 BD 04                           cmp ax,n2
+[ 262]    03A9: 7F DC                                 jg b
+[ 263]        :                                       
+[ 264]    03AB: 89 0E BD 04                           mov n2,cx
+[ 265]    03AF: 39 0E B9 04                           cmp n1,cx
+[ 266]    03B3: 7F 99                                 jg divid
+[ 267]    03B5: FE 06 D2 04                           inc string[7]
+[ 268]    03B9: E9 BE 00                              jmp answer
+[ 269]        :                                       
+[ 270]        :                                       ;multiply funtion
+[ 271]    03BC:                                       multiply:
+[ 272]    03BC: B3 0A                                 mov bl,10
+[ 273]    03BE: B8 00 00                              mov ax,0
+[ 274]    03C1: A0 C4 04                              mov al,num1[3]
+[ 275]    03C4: F6 A4 C6 04                           mul num2[si]
+[ 276]    03C8: B3 0A                                 mov bl,10
+[ 277]    03CA: F6 F3                                 div bl
+[ 278]    03CC: 00 A5 CB 04                           add string[di],ah
+[ 279]    03D0: 00 85 CA 04                           add string[di-1],al
+[ 280]    03D4: 8A 85 CB 04                           mov al,string[di]
+[ 281]    03D8: B4 00                                 mov ah,0
+[ 282]    03DA: F6 F3                                 div bl
+[ 283]    03DC: 88 A5 CB 04                           mov string[di],ah
+[ 284]    03E0: 00 85 CA 04                           add string[di-1],al
+[ 285]        :                                       
+[ 286]    03E4: A0 C3 04                              mov al,num1[2]
+[ 287]    03E7: F6 A4 C6 04                           mul num2[si]
+[ 288]    03EB: F6 F3                                 div bl
+[ 289]    03ED: 00 A5 CA 04                           add string[di-1],ah
+[ 290]    03F1: 00 85 C9 04                           add string[di-2],al
+[ 291]    03F5: 8A 85 CA 04                           mov al,string[di-1]
+[ 292]    03F9: B4 00                                 mov ah,0
+[ 293]    03FB: F6 F3                                 div bl
+[ 294]    03FD: 88 A5 CA 04                           mov string[di-1],ah
+[ 295]    0401: 00 85 C9 04                           add string[di-2],al
+[ 296]        :                                       
+[ 297]    0405: A0 C2 04                              mov al,num1[1]
+[ 298]    0408: F6 A4 C6 04                           mul num2[si]
+[ 299]    040C: F6 F3                                 div bl
+[ 300]    040E: 00 A5 C9 04                           add string[di-2],ah
+[ 301]    0412: 00 85 C8 04                           add string[di-3],al
+[ 302]    0416: 8A 85 C9 04                           mov al,string[di-2]
+[ 303]    041A: B4 00                                 mov ah,0
+[ 304]    041C: F6 F3                                 div bl
+[ 305]    041E: 88 A5 C9 04                           mov string[di-2],ah
+[ 306]    0422: 00 85 C8 04                           add string[di-3],al
+[ 307]        :                                       
+[ 308]    0426: A0 C1 04                              mov al,num1[0]
+[ 309]    0429: F6 A4 C6 04                           mul num2[si]
+[ 310]    042D: F6 F3                                 div bl
+[ 311]    042F: 00 A5 C8 04                           add string[di-3],ah
+[ 312]    0433: 00 85 C7 04                           add string[di-4],al
+[ 313]    0437: 8A 85 C8 04                           mov al,string[di-3]
+[ 314]    043B: B4 00                                 mov ah,0
+[ 315]    043D: F6 F3                                 div bl
+[ 316]    043F: 88 A5 C8 04                           mov string[di-3],ah
+[ 317]    0443: 00 85 C7 04                           add string[di-4],al
+[ 318]        :                                       
+[ 319]    0447: 4E                                    dec si
+[ 320]    0448: 4F                                    dec di
+[ 321]    0449: 49 E3 03 E9 6D FF                     loop multiply
+[ 322]    044F: EB 29                                 jmp answer
+[ 323]        :                                       ; if divid y zero
+[ 324]    0451:                                       div_by_zero:
+[ 325]    0451: BA 44 05                              MOV DX,offset m4
+[ 326]    0454: B4 09                                 MOV AH,9
+[ 327]    0456: CD 21                                 INT 21H
+[ 328]    0458: EB 43                                 jmp endl
+[ 329]        :                                       ;if substrac a smaller number
+[ 330]    045A:                                       negative:
+[ 331]    045A: BA AE 05                              MOV DX,offset jump_line
+[ 332]    045D: B4 09                                 MOV AH,9
+[ 333]    045F: CD 21                                 INT 21H
+[ 334]    0461: BA 70 05                              MOV DX,offset m6
+[ 335]    0464: B4 09                                 MOV AH,9
+[ 336]    0466: CD 21                                 INT 21H
+[ 337]    0468: EB 33                                 jmp endl
+[ 338]        :                                       ;if divided by a smaller number
+[ 339]    046A:                                       less:
+[ 340]    046A: BA AE 05                              MOV DX,offset jump_line
+[ 341]    046D: B4 09                                 MOV AH,9
+[ 342]    046F: CD 21                                 INT 21H
+[ 343]    0471: BA 54 05                              MOV DX,offset m5
+[ 344]    0474: B4 09                                 MOV AH,9
+[ 345]    0476: CD 21                                 INT 21H
+[ 346]    0478: EB 23                                 jmp endl
+[ 347]        :                                       ;set menssage to show the result numeber
+[ 348]    047A:                                       answer:
+[ 349]    047A: BA AE 05                              MOV DX,offset jump_line
+[ 350]    047D: B4 09                                 MOV AH,9
+[ 351]    047F: CD 21                                 INT 21H
+[ 352]    0481: BA 3A 05                              MOV DX,offset m3
+[ 353]    0484: B4 09                                 MOV AH,9
+[ 354]    0486: CD 21                                 INT 21H
+[ 355]        :                                       
+[ 356]    0488: B9 08 00                              mov cx,8
+[ 357]    048B: BE 00 00                              mov si,0
+[ 358]        :                                       ;print the char one by one
+[ 359]    048E:                                       print:
+[ 360]    048E: 8A 84 CB 04                           mov  al,string[si]
+[ 361]    0492: 04 30                                 add al,30h
+[ 362]    0494: 8A D0                                 mov dl,al
+[ 363]    0496: B4 02                                 mov ah,2
+[ 364]    0498: CD 21                                 int 21h
+[ 365]    049A: 46                                    inc si
+[ 366]    049B: E2 F1                                 loop print
+[ 367]    049D:                                       endl:
+[ 368]    049D: BA AE 05                              MOV DX,offset jump_line
+[ 369]    04A0: B4 09                                 MOV AH,9
+[ 370]    04A2: CD 21                                 INT 21H
+[ 371]    04A4: BA 8E 05                              MOV DX,offset m7
+[ 372]    04A7: B4 09                                 MOV AH,9
+[ 373]    04A9: CD 21                                 INT 21H
+[ 374]        :                                       
+[ 375]    04AB: B4 01                                 Mov AH,1
+[ 376]    04AD: CD 21                                 int 21h
+[ 377]    04AF: 3C 0D                                 cmp al,13
+[ 378]    04B1: 75 03 E9 4A FC                        je begin
+[ 379]        :                                       
+[ 380]    04B6: C3                                    ret
+[ 381]        :                                       ;Declare variable
+[ 382]    04B7: 00 24                                 index db 0,'$'
+[ 383]    04B9: 00 00 24 00                           n1 dw 0,'$'
+[ 384]    04BD: 00 00 24 00                           n2 dw 0,'$'
+[ 385]    04C1: 00 00 00 00 24                        num1 db 4 dup(?),'$'
+[ 386]    04C6: 00 00 00 00 24                        num2 db 4 dup(?),'$'
+[ 387]    04CB: 00 00 00 00 00 00 00 00 24            string db 8 dup(?),'$'
+[ 388]    04D4: 74 79 70 65 20 74 68 65 20 66 69 72   m0 dw "type the first number :$"
+                73 74 20 6E 75 6D 62 65 72 3A 24 00 
+                                                    
+[ 389]    04EC: 74 79 70 65 20 74 68 65 20 73 65 63   m1 dw "type the second number:$"
+                6F 6E 64 20 6E 75 6D 62 65 72 3A 24 
+                                                    
+[ 390]    0504: 74 79 70 65 20 2B 20 74 6F 20 61 64   m2 dw "type + to add ,- to subtract, & divide or . multiply :$"
+                64 20 2C 2D 20 74 6F 20 73 75 62 74 
+                72 61 63 74 2C 20 26 20 64 69 76 69 
+                64 65 20 6F 72 20 2E 20 6D 75 6C 74 
+                69 70 6C 79 3A 24                   
+[ 391]    053A: 72 65 73 75 6C 74 3A 20 24 00         m3 dw "result : $"
+[ 392]    0544: 64 69 76 69 64 65 64 20 62 79 20 7A   m4 dw "divided by zero$"
+                65 72 6F 24                         
+[ 393]    0554: 64 69 76 69 64 65 64 20 62 79 20 61   m5 dw "divided by a smaller number$"
+                20 73 6D 61 6C 6C 65 72 20 6E 75 6D 
+                62 65 72 24                         
+[ 394]    0570: 73 75 62 73 74 72 61 63 20 62 79 20   m6 dw "substrac by a smaller number$"
+                61 20 73 6D 61 6C 6C 65 72 20 6E 75 
+                6D 62 65 72 24 00                   
+[ 395]    058E: 63 6F 6E 74 69 6E 75 65 3F 20 45 4E   m7 dw "continue? ENTER=YES///ANY KEY=NO"
+                54 45 52 3D 59 45 53 2F 2F 2F 41 4E 
+                59 20 4B 45 59 3D 4E 4F             
+[ 396]    05AE: 0A 00 0D 00 24 00                     jump_line dw 10,13,'$'
+[ 397]        :                                       
+[ 398]        :                                       
+[ 399]        :                                       
+ 
+===================================================================================================
+ 
+
+
+
+
+===================================================================================================

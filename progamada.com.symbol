@@ -1,0 +1,45 @@
+< THE SYMBOL TABLE >  progamada.com  --  emu8086 assembler version: 4.02 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+BEGIN                    	00100     	-1        	LABEL     	(NOSEG)   
+FIRST                    	0018B     	-1        	LABEL     	(NOSEG)   
+DEL1                     	001D2     	-1        	LABEL     	(NOSEG)   
+DEL2                     	001F9     	-1        	LABEL     	(NOSEG)   
+DEL3                     	00220     	-1        	LABEL     	(NOSEG)   
+CONT                     	0023A     	-1        	LABEL     	(NOSEG)   
+SECOND                   	0024D     	-1        	LABEL     	(NOSEG)   
+CONT2                    	0028F     	-1        	LABEL     	(NOSEG)   
+WHILE                    	002A5     	-1        	LABEL     	(NOSEG)   
+SIGN                     	002D8     	-1        	LABEL     	(NOSEG)   
+ADD_                     	00306     	-1        	LABEL     	(NOSEG)   
+SUBTRACT                 	00324     	-1        	LABEL     	(NOSEG)   
+DIVID                    	0034E     	-1        	LABEL     	(NOSEG)   
+A                        	00378     	-1        	LABEL     	(NOSEG)   
+B                        	00387     	-1        	LABEL     	(NOSEG)   
+MULTIPLY                 	003BC     	-1        	LABEL     	(NOSEG)   
+DIV_BY_ZERO              	00451     	-1        	LABEL     	(NOSEG)   
+NEGATIVE                 	0045A     	-1        	LABEL     	(NOSEG)   
+LESS                     	0046A     	-1        	LABEL     	(NOSEG)   
+ANSWER                   	0047A     	-1        	LABEL     	(NOSEG)   
+PRINT                    	0048E     	-1        	LABEL     	(NOSEG)   
+ENDL                     	0049D     	-1        	LABEL     	(NOSEG)   
+INDEX                    	004B7     	1         	VAR       	(NOSEG)   
+N1                       	004B9     	2         	VAR       	(NOSEG)   
+N2                       	004BD     	2         	VAR       	(NOSEG)   
+NUM1                     	004C1     	1         	VAR       	(NOSEG)   
+NUM2                     	004C6     	1         	VAR       	(NOSEG)   
+STRING                   	004CB     	1         	VAR       	(NOSEG)   
+M0                       	004D4     	2         	VAR       	(NOSEG)   
+M1                       	004EC     	2         	VAR       	(NOSEG)   
+M2                       	00504     	2         	VAR       	(NOSEG)   
+M3                       	0053A     	2         	VAR       	(NOSEG)   
+M4                       	00544     	2         	VAR       	(NOSEG)   
+M5                       	00554     	2         	VAR       	(NOSEG)   
+M6                       	00570     	2         	VAR       	(NOSEG)   
+M7                       	0058E     	2         	VAR       	(NOSEG)   
+JUMP_LINE                	005AE     	2         	VAR       	(NOSEG)   
+===================================================================================================
+[ 05/06/2013  --  04:05:27 p.m. ] 
+< END >
+ 
